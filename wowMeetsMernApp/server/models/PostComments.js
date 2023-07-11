@@ -5,6 +5,7 @@ const CommentsSchema = new mongoose.Schema({
     commentorId: String,
     content: String,
     postId: String,
+    timeDate: String,
     id: String
 });
 

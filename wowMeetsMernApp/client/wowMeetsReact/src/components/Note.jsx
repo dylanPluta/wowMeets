@@ -5,6 +5,8 @@ import { Link, link } from "react-router-dom";
 
 function Note(props) {
   
+
+
   function handleClick() {
     props.onDelete(props.id);
   }
@@ -17,9 +19,8 @@ function Note(props) {
     <h2>{props.userName}</h2>
       <h1>{props.title}</h1>
       <p>{props.content}</p>
-      <p>{props.jsonDate}</p>
-
-    <Link to={'posts/' + props.id}>
+      
+    <Link to={window.location.origin + "/posts/"+ props.id}>
      <p>read More...</p>
     </Link>
 

@@ -8,11 +8,12 @@ function CreateComment(props) {
   const [isExpanded, setExpanded] = useState(false);
 
   var userName = props.usersName;
-  
+  var currentMilli = Date.now();
 
   const [comment, setComment] = useState({
     userName: userName,
     content: "",
+    timeDate: currentMilli,
     postId:props.id
   });
 
@@ -28,6 +29,7 @@ function CreateComment(props) {
   }
 
   function submitComment(event) {
+    currentMilli = Date.now();
     props.onAdd(comment);
     console.log(userName + " yo");
     let result = Array.isArray(userName);
@@ -35,6 +37,7 @@ function CreateComment(props) {
     setComment({
       userName: userName,
       content: "",
+      timeDate: currentMilli,
       postId: props.id
     });
     console.log(props.id);

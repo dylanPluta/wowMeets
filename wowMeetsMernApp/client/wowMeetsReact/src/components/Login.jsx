@@ -22,8 +22,8 @@ const Login = () => {
 
             <main>
               <h1>Hello,     
-              <Link to={'users/' + userName}>
-              {userName}
+              <Link className="hypeLink" to={'users/' + userName}>
+              {" " + userName}
               </Link>
               </h1>
 
@@ -33,7 +33,10 @@ const Login = () => {
                   {/* <td>${req.user.id}</td> */}
 
               <br />
-              <a href="http://localhost:3001/logout">Logout</a>
+              <Link className="hypeLink" to="http://localhost:3001/logout">
+              Logout
+              </Link>
+              {/* <a className="hypeLink" href="http://localhost:3001/logout">Logout</a> */}
             </main>
 
           )
@@ -44,10 +47,13 @@ const Login = () => {
         return(
 
             <main>
-              <h1>Hello, {userName} </h1>
+              <h1>Hello, <a className="hypeLink"> {userName}</a> </h1>
               {/* <h2>{userName}</h2> */}
               <br />
-              <a href="http://localhost:3001/oauth/battlenet">Login with Bnet</a>
+              <Link className="hypeLink" to="http://localhost:3001/oauth/battlenet">
+              Login with Battle.Net
+              </Link>
+              {/* <a className="hypeLink" href="http://localhost:3001/oauth/battlenet">Login with Battle.Net</a> */}
             </main>
         )
         ;

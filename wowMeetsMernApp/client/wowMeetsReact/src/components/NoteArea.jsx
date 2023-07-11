@@ -1,16 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Note from "./Note";
 import { Link } from "react-router-dom";
 
 const NoteArea = ({notes, deleteNote, selectedRealm, selectedPostType}) => {
-    return(
+   
+  const [noteStatus, setNoteStatus] = useState([""]); 
+
+  useEffect(() => {
+    const findNote = document.getElementsByClassName('note');
+    console.log(findNote);
+if (findNote.length > 0){
+  console.log("found NOtes")
+  setNoteStatus("");
+} else {
+  console.log("no NOtes")
+  setNoteStatus("No posts to display.");
+
+
+}
+
+  },[selectedRealm, selectedPostType]);
+  
+  
+  return(
       
         <main className='NoteArea'>
+             <h1 className='noteStatus'>{noteStatus}</h1>
             {
               notes.map((noteItem, index) => {
+                
                 if (selectedRealm == "All"){
                   if (selectedPostType == "All"){
-                  return (
+                  return (    
+
                 <Note
                   key={index}
                   id={noteItem._id}
@@ -30,7 +52,10 @@ const NoteArea = ({notes, deleteNote, selectedRealm, selectedPostType}) => {
                   onDelete={deleteNote}
                 />
                   )
-                }
+
+                  }
+
+
 
                 
                   if (noteItem.postType == selectedPostType){

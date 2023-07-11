@@ -23,28 +23,13 @@ function App() {
 
 
   useEffect(() => {
-    // const fetchPosts = async () => {
-    //   try {
-    //     const response = await api.get(`posts`);
-    //     setNotes(response.data);      
-    //     console.log("useEffect")
-    //   }catch (err){
-    //     if (err.response) {
-    //     console.log(err.response.data);
-    //     console.log(err.response.status);
-    //     console.log(err.response.headers);
-    //     } else {
-    //       console.log(`error: ${err.message}`)
-    //     }
 
-    //   } 
-    // } 
     console.log("useEffect")
     fetchPosts();
   },[]);
   
 
-  async function fetchPosts () {
+  function fetchPosts () {
     try {
       axios.get("http://localhost:3001/getPosts").then((response)=> {
         setNotes(response.data)

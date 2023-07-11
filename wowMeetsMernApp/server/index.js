@@ -59,7 +59,7 @@ passport.use(
 
 // configure Express
 app.use(cookieParser());
-app.use(session({ secret: 'passport-battlenet-example', // Change this value to a unique value for your application!
+app.use(session({ secret: 'passport-battlenet-wowMeets', // Change this value to a unique value for your application!
                   saveUninitialized: true,
                   resave: true }));
 
@@ -103,9 +103,6 @@ app.use(function (err, req, res, next) {
   res.send("<h1>Internal Server Error</h1>");
 });
 
-// const server = app.listen(3000, function() {
-//   console.log('Listening on port %d', server.address().port);
-// });
 
 
 
@@ -140,18 +137,6 @@ app.get('/getRealm', function(req, res) {
 
 
 
-
-
-//   request( { RealmUrl, json: true }, (error, response) => {
-
-//     if (error) {
-//         // callback("Unable to connect to location ", undefined)
-        
-//     } else {
-//         // callback(undefined, response)
-//         res.send(response)
-//     }}
-// )})
 
 
 
@@ -214,7 +199,7 @@ app.get("/getPosts", (req, res) => {
 
 
   const rule = new schedule.RecurrenceRule();
-  rule.minute = 23;
+  rule.minute = 5;
   
   const job = schedule.scheduleJob(rule, function(){
     console.log('The answer to life, the universe, and everything!');
@@ -222,40 +207,84 @@ app.get("/getPosts", (req, res) => {
     console.log( now, "now" );
 
 
-
+//find posts
     PostModel.find({}).then(function(result){
       const theResult = result;
+      console.log(theResult);
 
 
 
+//for every post
     for (var i = 0; i < theResult.length; i++) {
-      var postTime = theResult[i].timeDate;
+      const theResultRefined = theResult[i]
+      CommentsModel.find({}).then(function(result){
+        if (result > 0){
+//for all comments
+        for (var i = 0; i < result.length; i++) {
+//check if comments and post share id
+          if (result[i].postId == theResultRefined._id.toHexString()){
+            console.log(result, theResultRefined._id.toHexString())
+            console.log("we got a bingo!")
+            console.log(result[result.length-1]);
+            diff =  now - result[result.length-1].timeDate;
+            console.log(theResultRefined._id)
+//check diff            
+            if (diff >= 5){
+              console.log("delete")
+              CommentsModel.deleteMany({postId: theResultRefined._id}).then(function(result){
+                console.log(result);
+              });
 
-      console.log(postTime, "post")
-      var diff = now - postTime;
-        console.log(diff, "diff")
-      
-      if (diff >= 5){
-        console.log("delete")
-        console.log(theResult[i]._id.toHexString());
-        PostModel.findByIdAndDelete(theResult[i]._id.toHexString()).then( function(err){
-          console.log(theResult[i]._id.toHexString(), "deleted")
-       }).catch(err => console.log("Error"));
+              PostModel.findByIdAndDelete(theResultRefined._id).then( function(result){
+              console.log(result, "deleted")
+              })
+            } else {
+              console.log("dont delete")
+            }
+
+          } else {
+            console.log(result[i].postId, theResultRefined._id.toHexString())
+            console.log("no  Biingo sir")
+
+            var diff = now - theResultRefined.timeDate;
+                console.log(diff, "diff")
+              
+              if (diff >= 5){
+                console.log("delete")
+                console.log(theResultRefined._id.toHexString());
+                PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
+                  console.log(theResultRefined._id.toHexString(), "deleted")
+               })
+                
+              } else {
+                console.log("dont delete")
+              }
         
-      } else {
-        console.log("dont delete")
-      }
+
+          }
+        }} else {
+
+          console.log("no  comment sir")
+
+          var diff = now - theResultRefined.timeDate;
+              console.log(diff, "diff")
+            
+            if (diff >= 5){
+              console.log("delete")
+              console.log(theResultRefined._id.toHexString());
+              PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
+                console.log(theResultRefined._id.toHexString(), "deleted")
+             })
+              
+            } else {
+              console.log("dont delete")
+            }
+        }
+
+    })
 
 
-    }
-
-
-
-
-
-   
-
-}).catch((err) => {
+  }}).catch((err) => {
 console.log(err, "error")
 
 })

@@ -8,7 +8,7 @@ html {
 }
 body {
   padding: 0;
-  background-color: #272014;
+  background-color: #201500;
 background-image: url("https://transparenttextures.com/patterns/gradient-squares.png");
 }
 
@@ -30,6 +30,10 @@ header h1 {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
   font-family: sans; color: rgba(255, 196, 0, 0.904);
+}
+
+.hypeLink {
+  color: whitesmoke;
 }
 
 .siteHeader {
@@ -68,6 +72,8 @@ margin-bottom: 0;
 
 .postArea {
   text-align: center;
+  color: whitesmoke;
+  padding-top: 15px;
 }
 
 footer {
@@ -145,6 +151,18 @@ footer p {
   margin: auto;
 }
 
+.noteStatus {
+  color: rgba(255, 196, 0, 0.904);
+padding-top: 15px;
+padding-bottom: 15px;
+margin-bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .note button {
   position: relative;
   float: right;
@@ -180,7 +198,7 @@ form.create-note button {
   position: absolute;
   right: 18px;
   bottom: -18px;
-  background: #0ba80b;
+  background: #2d0644;
   color: #fff;
   border: none;
   border-radius: 50%;
