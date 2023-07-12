@@ -175,6 +175,22 @@ margin-bottom: 0;
   outline: none;
 }
 
+.about {
+  background-color: #2d064494;
+  width: 45rem;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  padding: 15px;
+}
+
+.inlineLink {
+  display: inline;
+  text-align: center;
+  color: whitesmoke;
+}
+
 form.create-note {
   position: relative;
   width: 480px;

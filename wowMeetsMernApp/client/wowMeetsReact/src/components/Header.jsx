@@ -2,6 +2,7 @@ import React from "react";
 import HighlightIcon from "@material-ui/icons/Highlight";
 import wowLogo from '../images/wowMeetLogo.png'
 import LoginArea from './Login';
+import { Link } from "react-router-dom";
 
 function Header() {
   return (

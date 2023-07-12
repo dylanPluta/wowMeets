@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Note from "./Note";
 import { Link } from "react-router-dom";
 
-const NoteArea = ({notes, deleteNote, selectedRealm, selectedPostType}) => {
+const NoteArea = ({notes, selectedRealm, selectedPostType}) => {
    
   const [noteStatus, setNoteStatus] = useState([""]); 
 
@@ -49,7 +49,7 @@ if (findNote.length > 0){
                   content={(noteItem.content).length <= 25
                     ? noteItem.content
                     : `${(noteItem.content).slice(0, 25)}...`}
-                  onDelete={deleteNote}
+
                 />
                   )
 
@@ -76,7 +76,7 @@ if (findNote.length > 0){
                   content={(noteItem.content).length <= 25
                     ? noteItem.content
                     : `${(noteItem.content).slice(0, 25)}...`}
-                  onDelete={deleteNote}
+
                 />
               )
                   }
@@ -104,7 +104,7 @@ if (findNote.length > 0){
                   content={(noteItem.content).length <= 25
                     ? noteItem.content
                     : `${(noteItem.content).slice(0, 25)}...`}
-                  onDelete={deleteNote}
+
                 />
                   )
                 }
@@ -129,7 +129,7 @@ if (findNote.length > 0){
                   content={(noteItem.content).length <= 25
                     ? noteItem.content
                     : `${(noteItem.content).slice(0, 25)}...`}
-                  onDelete={deleteNote}
+
                 />
               )
                   }

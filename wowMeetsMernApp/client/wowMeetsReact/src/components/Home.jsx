@@ -166,7 +166,13 @@ function userSearch() {
 </div>
 <div>
             {usersName !== "guest" ? (
+              
+              selectedRealm && selectedPostType !== "empty" ? (
                 <CreateArea usersName={usersName} setNotes={setNotes} selectedRealm={selectedRealm} realmListState={realmListState} selectedPostType={selectedPostType}/>
+                ) : (
+                <h1 className='postArea'>Please select a Realm and Tag to Post.</h1>
+                )
+                
       ) : (
         <h1 className='postArea'>Please Login to Post.</h1>
       )}
@@ -176,5 +182,9 @@ function userSearch() {
         </main>
     )
 }
+
+
+
+
 
 export default Home
