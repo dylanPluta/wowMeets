@@ -1,6 +1,4 @@
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Link, link } from "react-router-dom";
 
 function Comment(props) {
   

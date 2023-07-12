@@ -169,7 +169,7 @@ app.get("/getPosts", (req, res) => {
     const newPost = new PostModel(post);
     await newPost.save();
   
-    res.json(post);
+    res.json(newPost);
   });
 
   app.post("/createComment", async (req, res) => {
@@ -199,7 +199,7 @@ app.get("/getPosts", (req, res) => {
 
 
   const rule = new schedule.RecurrenceRule();
-  rule.minute = 5;
+  rule.minute = 1;
   
   const job = schedule.scheduleJob(rule, function(){
     console.log('The answer to life, the universe, and everything!');
@@ -229,7 +229,7 @@ app.get("/getPosts", (req, res) => {
             diff =  now - result[result.length-1].timeDate;
             console.log(theResultRefined._id)
 //check diff            
-            if (diff >= 5){
+            if (diff >= 43200000){
               console.log("delete")
               CommentsModel.deleteMany({postId: theResultRefined._id}).then(function(result){
                 console.log(result);
@@ -249,7 +249,7 @@ app.get("/getPosts", (req, res) => {
             var diff = now - theResultRefined.timeDate;
                 console.log(diff, "diff")
               
-              if (diff >= 5){
+              if (diff >= 43200000){
                 console.log("delete")
                 console.log(theResultRefined._id.toHexString());
                 PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
@@ -269,7 +269,7 @@ app.get("/getPosts", (req, res) => {
           var diff = now - theResultRefined.timeDate;
               console.log(diff, "diff")
             
-            if (diff >= 5){
+            if (diff >= 43200000){
               console.log("delete")
               console.log(theResultRefined._id.toHexString());
               PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){

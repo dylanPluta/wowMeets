@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Note from "./Note";
-import CreateArea from "./CreateArea";
-import api from '../api/post';
 import Login from "./Login";
-import Register from "./Register";
 import Home from "./Home";
-import Details from "./Details";
 import About from "./About";
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import Layout  from './Layout';
-import NoteArea from './NoteArea';
 import PostPage from './PostPage';
 import UserPage from './UserPage';
 
@@ -34,9 +26,7 @@ function App() {
       axios.get("http://localhost:3001/getPosts").then((response)=> {
         setNotes(response.data)
       }, []);
-
-      // const response = await api.get(`posts`);
-      // setNotes(response.data);      
+    
       console.log("fetchPosts")
     }catch (err){
       if (err.response) {
@@ -115,17 +105,13 @@ export default App;
 
 export async function addNote(newNote){
   try {
-    // const response = await api.post(`/posts`, newNote)
     const result = await axios.post("http://localhost:3001/createPost", newNote )
       return result;
     
-    // setNotes(prevNotes => {
-    //   return [...prevNotes, response.data];
-    // });
 
     console.log("addNote");
           fetchPosts();
-          // navigate('/');
+
   }catch(err){
     console.log(`Error: ${err.message}`);
   }

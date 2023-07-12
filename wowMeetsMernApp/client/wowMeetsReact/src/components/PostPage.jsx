@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import React from 'react';
 import Comments from './Comments';
-import CreateComment from "./CreateComment";
+
 
 const PostPage = ({notes, deleteNote, addComment}) => {
     const { id } = useParams();
@@ -15,9 +15,7 @@ const PostPage = ({notes, deleteNote, addComment}) => {
                     <div>
                     <h2>{post.title}</h2>
                         <p className="postBody">{post.content}</p>
-                        {/* <button onClick={() => deleteNote(post.id)}>
-                            Delete Post
-                        </button> */}
+
                     </div>
                     <hr/>
                     <Comments notes={notes} />

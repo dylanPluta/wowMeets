@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
-import Select from "react-select";
 import { addNote } from "./App";
 
 function CreateArea(props) {
@@ -13,7 +12,6 @@ function CreateArea(props) {
   var userName = props.usersName;
   var matches = false;
 
-  // var jsonDate = (new Date());
   var currentMilli = Date.now();
   console.log(currentMilli);
 
@@ -59,7 +57,6 @@ function CreateArea(props) {
   async function submitNote(event) {
 
     event.preventDefault();
-    // jsonDate = (new Date()).toJSON();
 
     console.log(currentMilli)
 
@@ -115,7 +112,6 @@ function CreateArea(props) {
             onChange={handleChange}
             value={note.title}
             placeholder={isExpanded ? "Title" : "Make a post..."}
-            // rows={isExpanded ? 3 : 1}
           />
       
         {isExpanded && (

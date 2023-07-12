@@ -5,8 +5,8 @@ import Select from "react-select";
 
 
 import axios from 'axios';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Refresh } from '@material-ui/icons';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -34,7 +34,6 @@ async function checkForUser() {
     axios.get("http://localhost:3001/LoginApp", {withCredentials: true}).then((response)=> {
 
   console.log(response.data + " Home")
-  // userName = response.data;
   setUserName(response.data.toString())
 
   });
@@ -51,11 +50,7 @@ async function getRealmList () {
 
 for (var i = 0; i < response.data.realms.length; i++) {
   var object = response.data.realms[i].name.toString();
-  // console.log(object);
-  // console.log(object.name);
 
-  // setRealmList(object);
-  // setRealmList(oldArray => [...oldArray, object]);
   realmList.push({ value: object, label: object});
   realmList.sort();
 }
@@ -135,8 +130,7 @@ function userSearch() {
           placeholder="Select Realm"
           value={selectedOptions}
           onChange={handleSelect}
-          // isSearchable={true}
-          // isMulti
+
         />
       </div>
     </div>
@@ -149,8 +143,7 @@ function userSearch() {
           placeholder="Select Post Tag"
           value={selectedPostTypeOptions}
           onChange={handleSelectPostType}
-          // isSearchable={true}
-          // isMulti
+
         />
       </div>
     </div>
@@ -167,7 +160,7 @@ function userSearch() {
 <div>
             {usersName !== "guest" ? (
               
-              selectedRealm && selectedPostType !== "empty" ? (
+              selectedRealm !== "empty" && selectedPostType !== "empty" ? (
                 <CreateArea usersName={usersName} setNotes={setNotes} selectedRealm={selectedRealm} realmListState={realmListState} selectedPostType={selectedPostType}/>
                 ) : (
                 <h1 className='postArea'>Please select a Realm and Tag to Post.</h1>

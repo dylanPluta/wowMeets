@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from 'react-dom'
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 
 import axios from 'axios';
-import post from "../api/post";
+
 
 const Comments = (notes) => {
 
@@ -36,9 +35,6 @@ const Comments = (notes) => {
             console.log(response.data)
           }, []);
           console.log("fetchComments")
-        //   console.log(noteItem)
-        //   console.log(postComments)
-        // console.log(commentItem)
         console.log(id)
 
         }catch (err){

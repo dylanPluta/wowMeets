@@ -53,14 +53,6 @@ console.log("createCommentRender")
   return (
     <div>
       <form className="create-note">
-        {/* {isExpanded && (
-          <input
-            name="title"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Title"
-          />
-        )} */}
 
         <textarea
           name="content"

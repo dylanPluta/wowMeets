@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Note from "./Note";
-import { Link } from "react-router-dom";
 
 const NoteArea = ({notes, selectedRealm, selectedPostType}) => {
    
@@ -10,7 +9,7 @@ const NoteArea = ({notes, selectedRealm, selectedPostType}) => {
     const findNote = document.getElementsByClassName('note');
     console.log(findNote);
 if (findNote.length > 0){
-  console.log("found NOtes")
+  console.log("found Notes")
   setNoteStatus("");
 } else {
   console.log("no NOtes")

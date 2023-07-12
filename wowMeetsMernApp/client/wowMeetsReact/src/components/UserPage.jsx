@@ -1,7 +1,6 @@
 import { useLocation, useParams, Link } from "react-router-dom";
 import React from 'react';
-import Comments from './Comments';
-import CreateComment from "./CreateComment";
+
 import Note from "./Note";
 
 const UserPage = ({notes, deleteNote, addComment}) => {
@@ -24,12 +23,11 @@ const UserPage = ({notes, deleteNote, addComment}) => {
             <Note
               key={index}
               id={noteItem._id}
-              // userName={noteItem.userName}
+
               userName={(noteItem.userName).length <= 13
                     ? noteItem.userName
                     : `${(noteItem.content).slice(0, 13)}...`}
 
-              // realm={noteItem.realm}
               realm={(noteItem.realm).length <= 13
                     ? noteItem.realm
                     : `${(noteItem.realm).slice(0, 13)}...`}

@@ -36,17 +36,19 @@ const Login = () => {
 
           )
         ;
-        // res.send(output);
       } else {
         console.log(userName + " is not Authenticated");
         return(
 
             <main>
               <h1>Hello, <a className="hypeLink"> {userName}</a> </h1>
-              {/* <h2>{userName}</h2> */}
               <br />
               <Link className="hypeLink" to="http://localhost:3001/oauth/battlenet">
               Login with Battle.Net
+              </Link>
+              <p className='inlineLink'>     |     </p>
+              <Link className="hypeLink" to="/about">
+              About
               </Link>
             </main>
         )
