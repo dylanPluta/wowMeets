@@ -1,5 +1,5 @@
 import { useLocation, useParams, Link } from "react-router-dom";
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Note from "./Note";
 
@@ -14,10 +14,29 @@ const UserPage = ({notes, deleteNote, addComment}) => {
     const userNameHash = userName + location.hash;
     console.log(userNameHash);
 
+
+    const [noteStatus, setNoteStatus] = useState([""]); 
+
+    useEffect(() => {
+      const findNote = document.getElementsByClassName('note');
+      console.log(findNote);
+      if (findNote.length > 0){
+        console.log("found Notes")
+        setNoteStatus("");
+      } else {
+        console.log("no NOtes")
+        setNoteStatus("No posts to display.");
+      }
+    },[]);
+
+
+
+
    return(
 
-<main>{
-    notes.map((noteItem, index) => {
+<main>
+      <h1 className="userPageHeader">{userNameHash}</h1>
+    {notes.map((noteItem, index) => {
         if (noteItem.userName == userNameHash){
         return (
             <Note
@@ -44,12 +63,14 @@ const UserPage = ({notes, deleteNote, addComment}) => {
               )
             }else{
                 return(
-                <h1>Sorry, Looks like theres no posts for this</h1>
+                console.log("no more posts")
                 )
             }
+            
         }
-        )
-}</main>
+        )}
+        <h1 className='noteStatus'>{noteStatus}</h1>
+</main>
    )
 }
 

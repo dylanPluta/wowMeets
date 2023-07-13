@@ -12,7 +12,7 @@ const cors = require("cors");
 
 app.use(express.json());
 // app.use(cors());
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: 'http://www.wowmeets.com'}));
 
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
@@ -66,7 +66,7 @@ app.get('/oauth/battlenet',
 );
 
 app.get('/oauth/battlenet/callback',
-  passport.authenticate('bnet', { failureRedirect: 'http://localhost:3000/' }),
+  passport.authenticate('bnet', { failureRedirect: 'back' }),
   function(req, res){
     res.redirect('back');
   }
@@ -88,7 +88,7 @@ app.get('/LoginApp', function (req,res){
 app.get('/logout', function(req, res) {
   req.logout(function(err) {
     if (err) { return next(err); }
-  res.redirect('http://localhost:3000/');
+  res.redirect('back');
   });
 });
 

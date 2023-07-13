@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
     <Router>
     <Routes>
         <Route path="/*" element={<App />} />
-        {/* <App /> */}
+
     </Routes>
     </Router>
  </React.StrictMode>,
