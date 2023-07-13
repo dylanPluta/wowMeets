@@ -17,7 +17,7 @@ const About = () => {
                            12 hours with any activity, so hopefully with in that
                            time someone has gotten back with you.
                            <br/><br/>
-                           if you have any questions or concerns please email me at <a className='hypeLink' href="mailto:wowmeetssite@gmail.com">wowmeetssite@gmail.com</a>
+                           if you have any questions or concerns please email wowMeets at <a className='hypeLink' href="mailto:wowmeetssite@gmail.com">wowmeetssite@gmail.com</a>
                            </p>
         </main>
     )

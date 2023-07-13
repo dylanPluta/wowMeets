@@ -12,13 +12,12 @@ const PostPage = ({notes, deleteNote, addComment}) => {
             <article className="notePostPage">
                 {post &&
                     <>  
-                    <div>
-                    <h2>{post.title}</h2>
-                        <p className="postBody">{post.content}</p>
-
-                    </div>
-                    <hr/>
-                    <Comments notes={notes} />
+                        <div>
+                            <h2>{post.title}</h2>
+                            <p className="postBody">{post.content}</p>
+                        </div>
+                        <hr/>
+                        <Comments notes={notes} />
                     </>
                 }
                 {!post &&

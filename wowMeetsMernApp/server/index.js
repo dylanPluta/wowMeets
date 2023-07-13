@@ -14,11 +14,6 @@ app.use(express.json());
 // app.use(cors());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
-
-
-
-
-
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -55,8 +50,6 @@ passport.use(
     })
 );
 
-// const app = express();
-
 // configure Express
 app.use(cookieParser());
 app.use(session({ secret: 'passport-battlenet-wowMeets', // Change this value to a unique value for your application!
@@ -69,14 +62,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/oauth/battlenet',
-        passport.authenticate('bnet'));
+  passport.authenticate('bnet')
+);
 
 app.get('/oauth/battlenet/callback',
-        passport.authenticate('bnet', { failureRedirect: 'http://localhost:3000/' }),
-        function(req, res){
-          res.redirect('back');
-        });
-
+  passport.authenticate('bnet', { failureRedirect: 'http://localhost:3000/' }),
+  function(req, res){
+    res.redirect('back');
+  }
+);
 
 app.get('/LoginApp', function (req,res){
   if(req.isAuthenticated()) {
@@ -95,7 +89,7 @@ app.get('/logout', function(req, res) {
   req.logout(function(err) {
     if (err) { return next(err); }
   res.redirect('http://localhost:3000/');
-});
+  });
 });
 
 app.use(function (err, req, res, next) {
@@ -103,13 +97,7 @@ app.use(function (err, req, res, next) {
   res.send("<h1>Internal Server Error</h1>");
 });
 
-
-
-
-
-
 var myToken = "empty"
-
 
 fetch("https://us.oauth.battle.net/oauth/token", {body: "grant_type=client_credentials", method:'POST', 
 headers: {'Authorization': 'Basic ' + btoa(BNET_ID + ':' + BNET_SECRET), "Content-Type": "application/x-www-form-urlencoded"}})
@@ -118,125 +106,100 @@ headers: {'Authorization': 'Basic ' + btoa(BNET_ID + ':' + BNET_SECRET), "Conten
   .then( myToken => console.log(myToken, "myToken"))
 );
 
-
-
-
-
 const RealmUrl = "https://us.api.blizzard.com/data/wow/realm/index?namespace=dynamic-us&locale=en_US"
 
 app.get('/getRealm', function(req, res) {
-      fetch(RealmUrl,{ method:'GET',  headers : {Authorization: "Bearer " + myToken}})
-      .then(response => {
-        response.json()
-        .then(data => {console.log(data);(res.send(data))});
-        // console.log(response);
-        console.log(myToken, "myToken again just to make sure its still right")
-      
+  fetch(RealmUrl,{ method:'GET',  headers : {Authorization: "Bearer " + myToken}})
+  .then(response => {
+    response.json()
+    .then(data => {console.log(data);(res.send(data))});
+      // console.log(response);
+      console.log(myToken, "myToken again just to make sure its still right")
+      })
 })
-})
-
-
-
-
-
-
-
-
-
-
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/posts", {useNewUrlParser: true})
 
 app.get("/getPosts", (req, res) => {
-    PostModel.find({}).then(function(result){
-              res.json(result);
-    }).catch((err) => {
-        res.json(err);
+  PostModel.find({}).then(function(result){
+    res.json(result);
+  }).catch((err) => {
+    res.json(err);
+  })
+});
 
-    })});
-
-    app.get("/getComments", (req, res) => {
-      CommentsModel.find({}).then(function(result){
-                res.json(result);
-      }).catch((err) => {
-          res.json(err);
+app.get("/getComments", (req, res) => {
+  CommentsModel.find({}).then(function(result){
+    res.json(result);
+  }).catch((err) => {
+    res.json(err);
   
-      })});
+  })
+});
   
-  app.post("/createPost", async (req, res) => {
-    const post = req.body;
-    const newPost = new PostModel(post);
-    await newPost.save();
+app.post("/createPost", async (req, res) => {
+  const post = req.body;
+  const newPost = new PostModel(post);
+  await newPost.save();
   
-    res.json(newPost);
-  });
+  res.json(newPost);
+});
 
-  app.post("/createComment", async (req, res) => {
-    const comment = req.body;
-    const newComment = new CommentsModel(comment);
-    await newComment.save();
+app.post("/createComment", async (req, res) => {
+  const comment = req.body;
+  const newComment = new CommentsModel(comment);
+  await newComment.save();
+  res.json(comment);
+});
+
+app.delete('/deletePost/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  console.log(PostModel.findById(id))
+  PostModel.findByIdAndDelete(id).then( function(err){
+    res.json({
+       msg:"delete request recieved."
+    });
+  }).catch(err => res.send("Error"));
+}); 
+
+const rule = new schedule.RecurrenceRule();
+rule.minute = 1;
   
-    res.json(comment);
-  });
-
-  app.delete('/deletePost/:id', (req, res) => {
-    const id = req.params.id;
-    console.log(id);
+const job = schedule.scheduleJob(rule, function(){
+  console.log('The answer to life, the universe, and everything!');
+  const now = Date.now(); // Unix timestamp in milliseconds
+  console.log( now, "now" );
 
 
-      console.log(PostModel.findById(id))
+  //find posts
+  PostModel.find({}).then(function(result){
+    const theResult = result;
+    console.log(theResult);
 
-      PostModel.findByIdAndDelete(id).then( function(err){
-             res.json({
-              msg:"delete request recieved."
-             });
-          }).catch(err => res.send("Error"));
-  }); 
-
-
-
-
-
-  const rule = new schedule.RecurrenceRule();
-  rule.minute = 1;
-  
-  const job = schedule.scheduleJob(rule, function(){
-    console.log('The answer to life, the universe, and everything!');
-    const now = Date.now(); // Unix timestamp in milliseconds
-    console.log( now, "now" );
-
-
-//find posts
-    PostModel.find({}).then(function(result){
-      const theResult = result;
-      console.log(theResult);
-
-
-
-//for every post
-    for (var i = 0; i < theResult.length; i++) {
-      const theResultRefined = theResult[i]
-      CommentsModel.find({}).then(function(result){
-        if (result > 0){
-//for all comments
+  //for every post
+  for (var i = 0; i < theResult.length; i++) {
+    const theResultRefined = theResult[i]
+    CommentsModel.find({}).then(function(result){
+      if (result > 0){
+        //for all comments
         for (var i = 0; i < result.length; i++) {
-//check if comments and post share id
+          //check if comments and post share id
           if (result[i].postId == theResultRefined._id.toHexString()){
             console.log(result, theResultRefined._id.toHexString())
             console.log("we got a bingo!")
             console.log(result[result.length-1]);
             diff =  now - result[result.length-1].timeDate;
             console.log(theResultRefined._id)
-//check diff            
+            //check diff            
             if (diff >= 43200000){
               console.log("delete")
               CommentsModel.deleteMany({postId: theResultRefined._id}).then(function(result){
                 console.log(result);
               });
-
               PostModel.findByIdAndDelete(theResultRefined._id).then( function(result){
-              console.log(result, "deleted")
+                console.log(result, "deleted")
               })
             } else {
               console.log("dont delete")
@@ -247,15 +210,13 @@ app.get("/getPosts", (req, res) => {
             console.log("no  Biingo sir")
 
             var diff = now - theResultRefined.timeDate;
-                console.log(diff, "diff")
-              
+              console.log(diff, "diff")            
               if (diff >= 43200000){
                 console.log("delete")
                 console.log(theResultRefined._id.toHexString());
                 PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
                   console.log(theResultRefined._id.toHexString(), "deleted")
-               })
-                
+                })  
               } else {
                 console.log("dont delete")
               }
@@ -263,35 +224,25 @@ app.get("/getPosts", (req, res) => {
 
           }
         }} else {
-
           console.log("no  comment sir")
-
           var diff = now - theResultRefined.timeDate;
-              console.log(diff, "diff")
-            
-            if (diff >= 43200000){
-              console.log("delete")
-              console.log(theResultRefined._id.toHexString());
-              PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
-                console.log(theResultRefined._id.toHexString(), "deleted")
-             })
-              
-            } else {
-              console.log("dont delete")
-            }
+          console.log(diff, "diff")
+          if (diff >= 43200000){
+            console.log("delete")
+            console.log(theResultRefined._id.toHexString());
+            PostModel.findByIdAndDelete(theResultRefined._id.toHexString()).then( function(err){
+              console.log(theResultRefined._id.toHexString(), "deleted")
+            })
+          } else {
+            console.log("dont delete")
+          }
         }
-
-    })
-
-
+      }
+    )
   }}).catch((err) => {
-console.log(err, "error")
-
-})
-}
-  );
-
-
+    console.log(err, "error")
+  })}
+);
 
 app.listen(3001, ()=> {
     console.log("Server Runs");

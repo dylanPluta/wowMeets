@@ -10,13 +10,13 @@ function Header() {
     <header>
     <div class="row">
       <div class="col-lg-6 col-md-12">
-      <h1 className="siteHeader">
+        <h1 className="siteHeader">
         <a href="/"><img src={wowLogo} className="headerIcon"></img></a>
         wow Meets
-      </h1>
+        </h1>
       </div>
       <div class="col-lg-6 col-md-12 loginHeader">
-      <LoginArea />
+        <LoginArea />
       </div>
     </div>
     </header>
