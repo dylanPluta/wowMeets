@@ -1,0 +1,252 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  padding: 0;
+  background-color: #201500;
+background-image: url("https://transparenttextures.com/patterns/gradient-squares.png");
+}
+
+header {
+   background-color: #15042e;
+   background-image: url("https://transparenttextures.com/patterns/black-paper.png");
+  margin: auto;
+  padding: 16px 32px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  /* color: #fff;
+  font-family: "McLaren", cursive; */
+  /* font-weight: 200; */
+
+
+  /* 1 pixel black shadow to left, top, right and bottom */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+  font-family: sans; color: rgba(255, 196, 0, 0.904);
+}
+
+.hypeLink {
+  color: whitesmoke;
+}
+
+.siteHeader {
+  font-size: 6rem;
+  text-align: center;
+}
+
+.siteDivider {
+  background-color: rgba(255, 196, 0, 0.904);
+  width: screen;
+  height: 5px;
+}
+
+.selectArea {
+  background-color: #2d064494;
+  width: 45rem;
+  height: 20rem;
+  margin: auto;
+}
+
+.selectorText {
+  color: rgba(255, 196, 0, 0.904);
+}
+
+.selectorPText {
+  color: rgba(255, 196, 0, 0.904);
+padding-top: 15px;
+margin-bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.postArea {
+  text-align: center;
+  color: whitesmoke;
+  padding-top: 15px;
+}
+
+footer {
+  position: relative;
+  text-align: center;
+  width:fit-content;
+  margin: auto;
+  bottom: 1px;
+}
+
+.PostPage {
+
+  width: fit-content;
+  margin: auto;
+}
+
+footer p {
+
+  color: #ccc;
+
+}
+
+.headerIcon {
+  padding-right: 5px;
+  height: 9rem ;
+  margin-top: -40px;
+  margin-bottom: -25px;
+}
+
+.loginHeader {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.note {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  min-width: 260px;
+  max-width: fit-content;
+  margin: 16px;
+  float: left;
+  height: 250px;
+}
+
+.notePostPage {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  min-width: 260px;
+  max-width: fit-content;
+  margin: 16px;
+  float: left;
+  height: fit-content;
+}
+
+
+
+.note h1 {
+  font-size: 1.1em;
+  margin-bottom: 6px;
+}
+.note p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.noteArea {
+  text-align: center;
+  width: fit-content;
+  margin: auto;
+}
+
+.noteStatus {
+  color: rgba(255, 196, 0, 0.904);
+padding-top: 15px;
+padding-bottom: 15px;
+margin-bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.note button {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  color: #0ba80b;
+  border: none;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+}
+
+.about {
+  background-color: #2d064494;
+  width: 45rem;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  padding: 15px;
+}
+
+.inlineLink {
+  display: inline;
+  text-align: center;
+  color: whitesmoke;
+}
+
+form.create-note {
+  position: relative;
+  width: 480px;
+  margin: 50px auto 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+form.create-note input,
+form.create-note textarea {
+  width: 100%;
+  border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.2em;
+  font-family: inherit;
+  resize: none;
+}
+form.create-note button {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  background: #2d0644;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+
+.dltBtn {
+  background-color: rgba(0, 156, 13, 0);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+.dropdown-container {
+  width: 300px;
+}
+
+
+@media (max-width: 991px) {
+  .selectArea {
+    background-color: #2d064494;
+    width: 25rem;
+    height: 28rem;
+    margin: auto;
+  }
+
+}
