@@ -2,112 +2,85 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
-
-import axios from 'axios';
+import { getComments, addComments } from "../api/commentsService";
+import { getUser } from "../api/usersService";
 
 
 const Comments = (notes) => {
 
-    const [comments, setComments] = useState([]); 
-    const [usersName, setUserName] = useState("guest"); 
-    const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
+  const [usersName, setUserName] = useState("guest");
+  const navigate = useNavigate();
 
 
-    const { id } = useParams();
-    const postComments = comments.find(commentItem => (commentItem.postId)?.toString() === id);
-    
+  const { id } = useParams();
+  const postComments = comments.find(commentItem => (commentItem.postId).toString() === id);
 
 
-    useEffect(() => {
-        console.log("useEffectComments");
-        fetchComments();
-        checkForUser();
-      },[]);
-    
-    async function fetchComments () {
-        try {
-          axios.get("http://localhost:3001/getComments").then((response)=> {
+
+  useEffect(() => {
+    console.log("useEffectComments");
+    fetchComments();
+    checkForUser();
+  }, []);
+
+  async function fetchComments() {
+    const response = await getComments(id);
+    setComments(response)
+  }
 
 
-          const result = response.data.filter(comment => comment.postId == id);
+  async function addComment(newComment) {
+    console.log(usersName);
+    if (usersName !== "guest") {
+      const response = await addComments(newComment);
+      setComments(prevComments => {
+        return [...prevComments, response.data];
+      });
 
-            setComments(result)
-            console.log(response.data)
-          }, []);
-          console.log("fetchComments")
-        console.log(id)
+      fetchComments();
 
-        }catch (err){
-          if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-          } else {
-            console.log(`error: ${err.message}`)
-          }
-    
-        } 
-      } 
-      
+    } else {
+      alert("You need to login first");
+    }
 
-    async function addComment(newComment){
-      console.log(usersName);
-      if(usersName !== "guest") {
-        try {
-          axios.post("http://localhost:3001/createComment", newComment ).then((response) => {
-            setComments(prevComments => {
-              return [...prevComments, response.data];
-            });
-          });
-          console.log("addComment");
-                fetchComments();
-                
-        }catch(err){
-          console.log(`Error: ${err.message}`);
-        }
-      } else {
-        alert("You need to login first");
-      }
-    } 
+  }
 
 
 
 
-async function checkForUser() {
-      axios.get("http://localhost:3001/LoginApp", {withCredentials: true}).then((response)=> {
+  async function checkForUser() {
+    const response = await getUser();
 
-    console.log(response.data)
-    // userName = response.data;
-    setUserName(response.data.toString())
-
-    }, []);
-}
+    console.log(response.data);
+    setUserName(response.data.toString());
+  }
 
 
 
-    return(
-        <main>
-    
-            {comments.map((commentItem, index, noteItem) => {
-             return (
-                <Comment
-                  key={index}
-                  id={commentItem._id}
-                  content={commentItem.content}
-                  userName={commentItem.userName}
-                  postId={commentItem.postId}
-                /> 
-                       
-            )
-            })}  
-            {usersName !== "guest" ? (
-              <CreateComment onAdd={addComment} notes={notes} id={id} usersName={usersName}/>
+  return (
+    <main>
+
+      {comments.map((commentItem, index, noteItem) => {
+        return (
+          <Comment
+            key={index}
+            id={commentItem._id}
+            content={commentItem.content}
+            userName={commentItem.userName}
+            postId={commentItem.postId}
+          />
+
+        )
+      })}
+      {usersName !== "guest" ? (
+        <CreateComment onAdd={addComment} notes={notes} id={id} usersName={usersName} />
       ) : (
         <h1>Please Login to Comment.</h1>
       )}
-               
-        </main>
-    )
+
+    </main>
+  )
 }
 
 export default Comments

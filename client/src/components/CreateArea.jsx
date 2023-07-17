@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
-import { addNote } from "./App";
+import { addNote } from "../api/postsService";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
-  
+
 
 
   var userName = props.usersName;
@@ -27,7 +27,7 @@ function CreateArea(props) {
   useEffect(() => {
     console.log(props.selectedRealm, "useEffect")
     if (note.realm !== props.selectedRealm || note.postType !== props.selectedPostType) {
-      setNote({    
+      setNote({
         userName: userName,
         realm: props.selectedRealm,
         postType: props.selectedPostType,
@@ -36,12 +36,12 @@ function CreateArea(props) {
         timeDate: currentMilli
       })
     }
-  },[ props.selectedRealm, props.selectedPostType]);
-  
+  }, [props.selectedRealm, props.selectedPostType]);
+
 
   function handleChange(event) {
 
-    
+
     const { name, value } = event.target;
 
     setNote(prevNote => {
@@ -60,9 +60,9 @@ function CreateArea(props) {
 
     console.log(currentMilli)
 
-  if (props.selectedRealm != "empty"){
+    if (props.selectedRealm != "empty") {
 
-    
+
       matches = true;
 
       console.log(matches, "does it match?")
@@ -71,26 +71,26 @@ function CreateArea(props) {
 
       console.log(note);
 
-      const {data} = await addNote(note);
-      setNote({
-        userName: userName,
-        realm: props.selectedRealm,
-        postType: props.selectedPostType,
-        title: "",
-        content: "",
-        timeDate: currentMilli
-      });
-      console.log(data, "setnotes")
-          props.setNotes(prevNotes => {
-      return [...prevNotes, data];
-    });
+      const response = await addNote(note);
+      if (response && response.data) {
+        setNote({
+          userName: userName,
+          realm: props.selectedRealm,
+          postType: props.selectedPostType,
+          title: "",
+          content: "",
+          timeDate: currentMilli
+        });
+        console.log(response.data, "setnotes")
+        props.setNotes(prevNotes => {
+          return [...prevNotes, response.data];
+        });
 
+      }
+    } else {
+      console.log(props.selectedRealm)
+    }
 
-
-  } else {
-    console.log(props.selectedRealm)
-  }
-    
   }
 
   function expand() {
@@ -106,21 +106,21 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
-          <input
-            name="title"
-            onClick={expand}
-            onChange={handleChange}
-            value={note.title}
-            placeholder={isExpanded ? "Title" : "Make a post..."}
-          />
-      
-        {isExpanded && (
-        <textarea
-          name="content"
+        <input
+          name="title"
+          onClick={expand}
           onChange={handleChange}
-          value={note.content}
-          placeholder="Body"
+          value={note.title}
+          placeholder={isExpanded ? "Title" : "Make a post..."}
         />
+
+        {isExpanded && (
+          <textarea
+            name="content"
+            onChange={handleChange}
+            value={note.content}
+            placeholder="Body"
+          />
         )}
         <Zoom in={isExpanded}>
           <Fab onClick={submitNote}>

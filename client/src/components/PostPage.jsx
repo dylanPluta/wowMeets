@@ -3,20 +3,20 @@ import React from 'react';
 import Comments from './Comments';
 
 
-const PostPage = ({notes, deleteNote, addComment}) => {
+const PostPage = ({ notes, deleteNote, addComment }) => {
     const { id } = useParams();
-    const post = notes.find(noteItem => (noteItem._id)?.toString() === id);
+    const post = notes.find(noteItem => (noteItem._id).toString() === id);
     console.log(post);
     return (
         <main className="PostPage">
             <article className="notePostPage">
                 {post &&
-                    <>  
+                    <>
                         <div>
                             <h2>{post.title}</h2>
                             <p className="postBody">{post.content}</p>
                         </div>
-                        <hr/>
+                        <hr />
                         <Comments notes={notes} />
                     </>
                 }
@@ -28,7 +28,7 @@ const PostPage = ({notes, deleteNote, addComment}) => {
                             <Link to='/'>Visit Our Homepage</Link>
                         </p>
                     </>
-                    
+
                 }
             </article>
         </main>

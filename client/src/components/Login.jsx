@@ -1,27 +1,31 @@
-import axios from 'axios';
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getUser } from '../api/usersService';
 
 const Login = () => {
-  const [userName, setUserName] = useState([]); 
+  const [userName, setUserName] = useState([]);
 
-  axios.get("http://localhost:3001/LoginApp", {withCredentials: true}).then((response)=> {
+  async function loadUser() {
+    const response = await getUser();
 
     console.log(response.data)
     setUserName(response.data)
-  }, []);
+  }
+
+  useEffect(() => {
+    loadUser();
+  }, [])
 
 
-
-  if(userName !== "guest") {
+  if (userName !== "guest") {
     console.log(userName + " is Authenticated");
 
-    return(
+    return (
       <main>
-        <h1>Hello,     
-        <Link className="hypeLink" to={'users/' + userName}>
-        {" " + userName}
-        </Link>
+        <h1>Hello,
+          <Link className="hypeLink" to={'users/' + userName}>
+            {" " + userName}
+          </Link>
         </h1>
         <br />
         <Link className="hypeLink" to="http://localhost:3001/logout">
@@ -36,7 +40,7 @@ const Login = () => {
   } else {
     console.log(userName + " is not Authenticated");
 
-    return(
+    return (
       <main>
         <h1>Hello, <a className="hypeLink"> {userName}</a> </h1>
         <br />
@@ -52,5 +56,5 @@ const Login = () => {
   }
 }
 
-export default Login 
+export default Login
 
