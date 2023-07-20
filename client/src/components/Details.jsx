@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Details = () => {
-    return (
-        <main>
-            <h1>Details</h1>
-        </main>
-    )
-}
+  return (
+    <main>
+      <h1>Details</h1>
+    </main>
+  );
+};
 
-export default Details
+export default Details;

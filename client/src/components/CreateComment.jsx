@@ -3,7 +3,6 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
 
-
 function CreateComment(props) {
   const [isExpanded, setExpanded] = useState(false);
 
@@ -14,16 +13,16 @@ function CreateComment(props) {
     userName: userName,
     content: "",
     timeDate: currentMilli,
-    postId:props.id
+    postId: props.id,
   });
 
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setComment(prevComment => {
+    setComment((prevComment) => {
       return {
         ...prevComment,
-        [name]: value
+        [name]: value,
       };
     });
   }
@@ -38,7 +37,7 @@ function CreateComment(props) {
       userName: userName,
       content: "",
       timeDate: currentMilli,
-      postId: props.id
+      postId: props.id,
     });
     console.log(props.id);
     event.preventDefault();
@@ -48,15 +47,14 @@ function CreateComment(props) {
     setExpanded(true);
   }
 
-console.log("createCommentRender")
+  console.log("createCommentRender");
 
   return (
     <div>
       <form className="create-note">
-
         <textarea
           name="content"
-           onClick={expand}
+          onClick={expand}
           onChange={handleChange}
           value={comment.content}
           placeholder="Make a comment..."

@@ -6,7 +6,6 @@ function Footer() {
     <footer>
       <p className="copyRight">Copyright ⓒ wowMeets {year}</p>
     </footer>
-
   );
 }
 

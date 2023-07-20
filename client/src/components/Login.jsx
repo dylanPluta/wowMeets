@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUser } from '../api/usersService';
+import { getUser } from "../api/usersService";
 
 const Login = () => {
   const [userName, setUserName] = useState([]);
@@ -8,22 +8,22 @@ const Login = () => {
   async function loadUser() {
     const response = await getUser();
 
-    console.log(response.data)
-    setUserName(response.data)
+    console.log(response.data);
+    setUserName(response.data);
   }
 
   useEffect(() => {
     loadUser();
-  }, [])
-
+  }, []);
 
   if (userName !== "guest") {
     console.log(userName + " is Authenticated");
 
     return (
       <main>
-        <h1>Hello,
-          <Link className="hypeLink" to={'users/' + userName}>
+        <h1>
+          Hello,
+          <Link className="hypeLink" to={"users/" + userName}>
             {" " + userName}
           </Link>
         </h1>
@@ -31,7 +31,7 @@ const Login = () => {
         <Link className="hypeLink" to="http://localhost:3001/logout">
           Logout
         </Link>
-        <p className='inlineLink'> |  </p>
+        <p className="inlineLink"> | </p>
         <Link className="hypeLink" to="/about">
           About
         </Link>
@@ -42,19 +42,20 @@ const Login = () => {
 
     return (
       <main>
-        <h1>Hello, <a className="hypeLink"> {userName}</a> </h1>
+        <h1>
+          Hello, <a className="hypeLink"> {userName}</a>{" "}
+        </h1>
         <br />
         <Link className="hypeLink" to="http://localhost:3001/oauth/battlenet">
           Login with Battle.Net
         </Link>
-        <p className='inlineLink'>     |     </p>
+        <p className="inlineLink"> | </p>
         <Link className="hypeLink" to="/about">
           About
         </Link>
       </main>
     );
   }
-}
+};
 
-export default Login
-
+export default Login;

@@ -9,12 +9,12 @@ html {
 body {
   padding: 0;
   background-color: #201500;
-background-image: url("https://transparenttextures.com/patterns/gradient-squares.png");
+  background-image: url("https://transparenttextures.com/patterns/gradient-squares.png");
 }
 
 header {
-   background-color: #15042e;
-   background-image: url("https://transparenttextures.com/patterns/black-paper.png");
+  background-color: #15042e;
+  background-image: url("https://transparenttextures.com/patterns/black-paper.png");
   margin: auto;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -25,11 +25,15 @@ header h1 {
   font-family: "McLaren", cursive; */
   /* font-weight: 200; */
 
-
   /* 1 pixel black shadow to left, top, right and bottom */
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow:
+    -1px 0 black,
+    0 1px black,
+    1px 0 black,
+    0 -1px black;
 
-  font-family: sans; color: rgba(255, 196, 0, 0.904);
+  font-family: sans;
+  color: rgba(255, 196, 0, 0.904);
 }
 
 .hypeLink {
@@ -60,14 +64,13 @@ header h1 {
 
 .selectorPText {
   color: rgba(255, 196, 0, 0.904);
-padding-top: 15px;
-margin-bottom: 0;
+  padding-top: 15px;
+  margin-bottom: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 }
 
 .postArea {
@@ -79,26 +82,23 @@ margin-bottom: 0;
 footer {
   position: relative;
   text-align: center;
-  width:fit-content;
+  width: fit-content;
   margin: auto;
   bottom: 1px;
 }
 
 .PostPage {
-
   width: fit-content;
   margin: auto;
 }
 
 footer p {
-
   color: whitesmoke;
-
 }
 
 .headerIcon {
   padding-right: 5px;
-  height: 9rem ;
+  height: 9rem;
   margin-top: -40px;
   margin-bottom: -25px;
 }
@@ -138,8 +138,6 @@ footer p {
   height: fit-content;
 }
 
-
-
 .note h1 {
   font-size: 1.1em;
   margin-bottom: 6px;
@@ -159,9 +157,9 @@ footer p {
 
 .noteStatus {
   color: rgba(255, 196, 0, 0.904);
-padding-top: 15px;
-padding-bottom: 15px;
-margin-bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 0;
 
   display: flex;
   flex-direction: column;
@@ -246,7 +244,6 @@ form.create-note button {
   width: 300px;
 }
 
-
 @media (max-width: 991px) {
   .selectArea {
     background-color: #2d064494;
@@ -254,5 +251,4 @@ form.create-note button {
     height: 28rem;
     margin: auto;
   }
-
 }

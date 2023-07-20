@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
- ReactDOM.render(
- <React.StrictMode>
+ReactDOM.render(
+  <React.StrictMode>
     <Router>
-    <Routes>
+      <Routes>
         <Route path="/*" element={<App />} />
-
-    </Routes>
+      </Routes>
     </Router>
- </React.StrictMode>,
- document.getElementById("root")
- );
-
- 
-
-
+  </React.StrictMode>,
+  document.getElementById("root"),
+);

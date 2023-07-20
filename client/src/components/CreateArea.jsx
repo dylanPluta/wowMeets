@@ -7,8 +7,6 @@ import { addNote } from "../api/postsService";
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
 
-
-
   var userName = props.usersName;
   var matches = false;
 
@@ -21,51 +19,46 @@ function CreateArea(props) {
     postType: props.selectedPostType,
     title: "",
     content: "",
-    timeDate: currentMilli
+    timeDate: currentMilli,
   });
 
   useEffect(() => {
-    console.log(props.selectedRealm, "useEffect")
-    if (note.realm !== props.selectedRealm || note.postType !== props.selectedPostType) {
+    console.log(props.selectedRealm, "useEffect");
+    if (
+      note.realm !== props.selectedRealm ||
+      note.postType !== props.selectedPostType
+    ) {
       setNote({
         userName: userName,
         realm: props.selectedRealm,
         postType: props.selectedPostType,
         title: "",
         content: "",
-        timeDate: currentMilli
-      })
+        timeDate: currentMilli,
+      });
     }
   }, [props.selectedRealm, props.selectedPostType]);
 
-
   function handleChange(event) {
-
-
     const { name, value } = event.target;
 
-    setNote(prevNote => {
+    setNote((prevNote) => {
       return {
         ...prevNote,
-        [name]: value
+        [name]: value,
       };
     });
   }
 
-
-
   async function submitNote(event) {
-
     event.preventDefault();
 
-    console.log(currentMilli)
+    console.log(currentMilli);
 
     if (props.selectedRealm != "empty") {
-
-
       matches = true;
 
-      console.log(matches, "does it match?")
+      console.log(matches, "does it match?");
 
       console.log(props.selectedRealm, "handleChange Realm");
 
@@ -79,29 +72,21 @@ function CreateArea(props) {
           postType: props.selectedPostType,
           title: "",
           content: "",
-          timeDate: currentMilli
+          timeDate: currentMilli,
         });
-        console.log(response.data, "setnotes")
-        props.setNotes(prevNotes => {
+        console.log(response.data, "setnotes");
+        props.setNotes((prevNotes) => {
           return [...prevNotes, response.data];
         });
-
       }
     } else {
-      console.log(props.selectedRealm)
+      console.log(props.selectedRealm);
     }
-
   }
 
   function expand() {
     setExpanded(true);
   }
-
-
-
-
-
-
 
   return (
     <div>
