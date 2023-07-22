@@ -44,7 +44,7 @@ const Login = () => {
     return (
       <main>
         <h1>
-          Hello, <a className="hypeLink"> {userName}</a>{" "}
+          Hello,{" "}<a className="hypeLink">{userName}</a>{" "}
         </h1>
         <br />
         <Link className="hypeLink" to={BASE_URL + "oauth/battlenet"}>
