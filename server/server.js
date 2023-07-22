@@ -74,7 +74,7 @@ app.get(
   "/oauth/battlenet/callback",
   passport.authenticate("bnet", { failureRedirect: "back" }),
   function (req, res) {
-    res.redirect("back");
+    res.redirect(process.env.CORS_ORIGIN || "http://localhost:3000");
   }
 );
 
