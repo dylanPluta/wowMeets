@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUser } from "../api/usersService";
+import { BASE_URL } from "../api/axiosConfig";
 
 const Login = () => {
   const [userName, setUserName] = useState([]);
@@ -28,7 +29,7 @@ const Login = () => {
           </Link>
         </h1>
         <br />
-        <Link className="hypeLink" to="http://localhost:3001/logout">
+        <Link className="hypeLink" to={BASE_URL + "/logout"}>
           Logout
         </Link>
         <p className="inlineLink"> | </p>
@@ -46,7 +47,7 @@ const Login = () => {
           Hello, <a className="hypeLink"> {userName}</a>{" "}
         </h1>
         <br />
-        <Link className="hypeLink" to="http://localhost:3001/oauth/battlenet">
+        <Link className="hypeLink" to={BASE_URL + "/oauth/battlenet"}>
           Login with Battle.Net
         </Link>
         <p className="inlineLink"> | </p>

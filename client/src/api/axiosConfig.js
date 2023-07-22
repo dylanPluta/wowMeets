@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_API_PROXY || 'http://localhost:3001';
+export const BASE_URL = process.env.REACT_APP_API_PROXY || 'http://localhost:3001';
 
 export const session = axios.create({
   baseURL: BASE_URL,
