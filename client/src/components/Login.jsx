@@ -29,7 +29,7 @@ const Login = () => {
           </Link>
         </h1>
         <br />
-        <Link className="hypeLink" to={BASE_URL + "/logout"}>
+        <Link className="hypeLink" to={BASE_URL + "logout"}>
           Logout
         </Link>
         <p className="inlineLink"> | </p>
@@ -47,7 +47,7 @@ const Login = () => {
           Hello, <a className="hypeLink"> {userName}</a>{" "}
         </h1>
         <br />
-        <Link className="hypeLink" to={BASE_URL + "/oauth/battlenet"}>
+        <Link className="hypeLink" to={BASE_URL + "oauth/battlenet"}>
           Login with Battle.Net
         </Link>
         <p className="inlineLink"> | </p>
