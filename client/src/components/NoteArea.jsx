@@ -7,6 +7,9 @@ const NoteArea = ({ notes, selectedRealm, selectedPostType }) => {
   useEffect(() => {
     const findNote = document.getElementsByClassName("note");
     console.log(findNote);
+    if (selectedRealm == "empty" || selectedPostType == "empty"){
+      setNoteStatus("Please Select a Realm and a Post Tag to see posts.");
+    }else{
     if (findNote.length > 0) {
       console.log("found Notes");
       setNoteStatus("");
@@ -14,6 +17,7 @@ const NoteArea = ({ notes, selectedRealm, selectedPostType }) => {
       console.log("no NOtes");
       setNoteStatus("No posts to display.");
     }
+  }
   }, [selectedRealm, selectedPostType]);
 
   return (

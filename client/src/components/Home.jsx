@@ -55,10 +55,10 @@ const Home = ({ notes, deleteNote, setNotes }) => {
   const [selectedRealm, setSelectedRealm] = useState("empty");
 
   // Function triggered on selection
-  function handleSelect() {
-    // setSelectedOptions(data);
+  function handleSelect(data) {
+    setSelectedOptions(data);
     console.log(selectedRealm, "selectData");
-    // setSelectedRealm(data.value.toString());
+    setSelectedRealm(data.value.toString());
   }
 
   const postTypeOptions = [
@@ -84,9 +84,15 @@ const Home = ({ notes, deleteNote, setNotes }) => {
   console.log(selectedPostType);
 
   function userSearch() {
+    if (document.getElementById("userSearchField").value == "") {
+      const searchName = "No User Specified.";
+      console.log(searchName);
+      navigate("/users/" + encodeURI(searchName));
+    } else {
     const searchName = document.getElementById("userSearchField");
     console.log(searchName.value);
     navigate("/users/" + encodeURI(searchName.value));
+    }
   }
 
 
@@ -100,29 +106,6 @@ const Home = ({ notes, deleteNote, setNotes }) => {
           </p>
         </div>
         <div className="app col-lg-6 col-md-12">
-
-          {/* <Autocomplete 
-            id="free-solo-demo"
-            sx={{ width: 300 }}
-            className="textInputField"
-            // onChange={handleSelect}
-            onChange={(event, value) =>{setSelectedRealm(value.label);
-              handleSelect();
-            } }
-            getOptionLabel = {option => option.label}
-            options={realmListState}
-            value={selectedOptions} 
-            renderInput={(params) => <TextField {...params} placeholder="  Select Realm" />}
-          /> */}
-
-
-
-
-
-
-
-
-
           <h2 className="selectorText">Realm</h2>
           <div className="dropdown-container">
             <Select
