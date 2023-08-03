@@ -40,9 +40,40 @@ header h1 {
   color: whitesmoke;
 }
 
+.indicatorContainorFix {
+  display: flex;
+  transition: color 150ms;
+    color: hsl(0, 0%, 80%);
+    padding: 6px 0 6px 6px;
+    box-sizing: border-box;
+    margin-right: -6px;
+}
+
+.selectPlaceholder {
+  color: hsl(0deg 0% 68.5%);
+}
+
+.searchIcon:hover {
+  color: #8a8a8a;
+}
+
 .siteHeader {
   font-size: 6rem;
   text-align: center;
+}
+
+.textInputField {
+  background-color: white;
+  border-color: rgb(204, 204, 204);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  outline: 0px !important;
+}
+
+.MuiIconButton-root {
+  padding:0;
 }
 
 .siteDivider {
