@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { getUser } from "../api/usersService";
 import { getRealms } from "../api/realmService";
 
+import {  TextField, IconButton } from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+
 const Home = ({ notes, deleteNote, setNotes }) => {
   const [usersName, setUserName] = useState("guest");
   const [realmListState, setRealmListState] = useState([]);
@@ -51,10 +55,10 @@ const Home = ({ notes, deleteNote, setNotes }) => {
   const [selectedRealm, setSelectedRealm] = useState("empty");
 
   // Function triggered on selection
-  function handleSelect(data) {
-    setSelectedOptions(data);
+  function handleSelect() {
+    // setSelectedOptions(data);
     console.log(selectedRealm, "selectData");
-    setSelectedRealm(data.value.toString());
+    // setSelectedRealm(data.value.toString());
   }
 
   const postTypeOptions = [
@@ -85,6 +89,8 @@ const Home = ({ notes, deleteNote, setNotes }) => {
     navigate("/users/" + encodeURI(searchName.value));
   }
 
+
+
   return (
     <main>
       <div className="row selectArea">
@@ -94,11 +100,34 @@ const Home = ({ notes, deleteNote, setNotes }) => {
           </p>
         </div>
         <div className="app col-lg-6 col-md-12">
+
+          {/* <Autocomplete 
+            id="free-solo-demo"
+            sx={{ width: 300 }}
+            className="textInputField"
+            // onChange={handleSelect}
+            onChange={(event, value) =>{setSelectedRealm(value.label);
+              handleSelect();
+            } }
+            getOptionLabel = {option => option.label}
+            options={realmListState}
+            value={selectedOptions} 
+            renderInput={(params) => <TextField {...params} placeholder="  Select Realm" />}
+          /> */}
+
+
+
+
+
+
+
+
+
           <h2 className="selectorText">Realm</h2>
           <div className="dropdown-container">
             <Select
               options={realmListState}
-              placeholder="Select Realm"
+              placeholder={<div className="selectPlaceholder">Select Realm</div>}
               value={selectedOptions}
               onChange={handleSelect}
             />
@@ -109,7 +138,7 @@ const Home = ({ notes, deleteNote, setNotes }) => {
           <div className="dropdown-container">
             <Select
               options={postTypeOptions}
-              placeholder="Select Post Tag"
+              placeholder={<div className="selectPlaceholder">Select Post Tag</div>}
               value={selectedPostTypeOptions}
               onChange={handleSelectPostType}
             />
@@ -118,12 +147,33 @@ const Home = ({ notes, deleteNote, setNotes }) => {
         <div className="app col-lg-12">
           <h2 className="selectorText">or</h2>
           <h2 className="selectorText">Search for a user's posts</h2>
-          <form>
-            <input id="userSearchField" placeholder="search for user" />
-            <button type="button" onClick={userSearch}>
-              Submit
-            </button>
-          </form>
+
+          <TextField className="textInputField"
+            placeholder="  Search For User"
+            id="userSearchField" 
+            InputProps={{
+            endAdornment: (
+            <InputAdornment>
+              <IconButton 
+                   
+                onClick={userSearch}
+                disableFocusRipple
+                disableRipple
+                style={{ backgroundColor: "transparent" }}
+                aria-label="twitter"
+              >
+              <div class=" css-1hb7zxy-IndicatorsContainer">
+                <span class=" css-1u9des2-indicatorSeparator">
+                </span>
+                <div class=" indicatorContainorFix" aria-hidden="true">
+                <SearchIcon className="searchIcon" />
+                </div></div>
+
+              </IconButton>
+            </InputAdornment>
+            )
+            }}
+          />
         </div>
       </div>
       <div>
