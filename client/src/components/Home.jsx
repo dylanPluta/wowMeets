@@ -13,7 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 const Home = ({ notes, deleteNote, setNotes }) => {
   const [usersName, setUserName] = useState("guest");
   const [realmListState, setRealmListState] = useState([]);
-  const realmList = [{ value: "All", label: "All" }];
+  const realmList = [];
 
   const navigate = useNavigate();
 
@@ -43,9 +43,10 @@ const Home = ({ notes, deleteNote, setNotes }) => {
       var object = response.data.realms[i].name.toString();
 
       realmList.push({ value: object, label: object });
-      realmList.sort();
+      realmList.sort((a, b) => a.value.localeCompare(b.value));
     }
     console.log(realmList);
+    realmList.unshift({ value: "All", label: "All" });
 
     setRealmListState(realmList);
     realmListState.sort();
@@ -63,11 +64,11 @@ const Home = ({ notes, deleteNote, setNotes }) => {
 
   const postTypeOptions = [
     { value: "All", label: "All" },
-    { value: "Trade", label: "Trade" },
     { value: "Duel", label: "Duel" },
     { value: "Quest", label: "Quest" },
     { value: "Raid/ Dungeon", label: "Raid/ Dungeon" },
-    { value: "Other", label: "Other" },
+    { value: "Trade", label: "Trade" },
+    { value: "Other", label: "Other" }
   ];
 
   const [selectedPostTypeOptions, setSelectedPostTypeOptions] = useState();
